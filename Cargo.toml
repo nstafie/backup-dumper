@@ -22,3 +22,10 @@ lz4_flex = "0.11.1"
 pbkdf2 = "0.12.1"
 rmp = "0.8.11"
 sha2 = "0.10.6"
+
+# Restic
+aes256ctr_poly1305aes = "0.1.1"
+base64 = "0.21.0"
+chrono = "0.4.26"
+scrypt = "0.11.0"
+zstd = { version = "0.12.3", features = ["experimental"] }

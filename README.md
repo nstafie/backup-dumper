@@ -12,3 +12,4 @@ cargo run
 
 ## Currently Supported Formats
 - Duplicacy
+- Restic (only files, no folder structure)

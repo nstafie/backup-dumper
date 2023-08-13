@@ -11,7 +11,7 @@ mod error;
 mod formats;
 mod utils;
 
-use formats::Duplicacy;
+use formats::{Duplicacy, Restic};
 
 #[derive(Parser, Debug)]
 struct Args {
@@ -35,6 +35,7 @@ struct Args {
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum, Debug)]
 enum BackupFormat {
     Duplicacy,
+    Restic,
 }
 
 fn main() -> miette::Result<()> {
@@ -52,6 +53,15 @@ fn main() -> miette::Result<()> {
             let mut duplicacy = Duplicacy::from_folder(args.repository, args.password)?;
             duplicacy.load_all()?;
             duplicacy.dump_all_files(args.output_dir)?;
+        }
+        BackupFormat::Restic => {
+            let mut restic = Restic::from_folder(
+                args.repository,
+                args.password
+                    .expect("Password is required for restic repositories"),
+            )?;
+            restic.load_all()?;
+            restic.dump_all_files(args.output_dir)?;
         }
     }
 
