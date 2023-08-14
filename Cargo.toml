@@ -29,3 +29,9 @@ base64 = "0.21.0"
 chrono = "0.4.26"
 scrypt = "0.11.0"
 zstd = { version = "0.12.3", features = ["experimental"] }
+
+# Knoxite
+aes = "0.8.2"
+cfb-mode = "0.8.2"
+serde_repr = "0.1"
+xz2 = "0.1"

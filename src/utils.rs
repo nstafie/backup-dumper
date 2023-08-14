@@ -29,3 +29,11 @@ pub fn from_datetime<'de, D: Deserializer<'de>>(
     let time = String::deserialize(d)?;
     DateTime::parse_from_rfc3339(&time).map_err(serde::de::Error::custom)
 }
+
+pub fn from_truthy<'de, D: Deserializer<'de>>(d: D) -> std::result::Result<bool, D::Error> {
+    let value = u64::deserialize(d)?;
+    match value {
+        0 => Ok(false),
+        _ => Ok(true),
+    }
+}

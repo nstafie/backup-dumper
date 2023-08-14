@@ -24,6 +24,8 @@ pub enum Error {
     ScryptInvalidOutput(#[from] scrypt::errors::InvalidOutputLen),
     #[error(transparent)]
     ChronoParse(#[from] chrono::ParseError),
+    #[error(transparent)]
+    Xz2Stream(#[from] xz2::stream::Error),
 
     // Format errors
     #[error(transparent)]
