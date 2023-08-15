@@ -11,7 +11,7 @@ mod error;
 mod formats;
 mod utils;
 
-use formats::{Duplicacy, Knoxite, Restic};
+use formats::{BlobBackup, Duplicacy, Knoxite, Restic};
 
 #[derive(Parser, Debug)]
 struct Args {
@@ -37,6 +37,7 @@ enum BackupFormat {
     Duplicacy,
     Restic,
     Knoxite,
+    BlobBackup,
 }
 
 fn main() -> miette::Result<()> {
@@ -71,8 +72,16 @@ fn main() -> miette::Result<()> {
                     .expect("Password is required for knoxite repositories"),
             )?;
             knoxite.load_all()?;
-            trace!("Knoxite: {:?}", knoxite);
             knoxite.dump_all_files(args.output_dir)?;
+        }
+        BackupFormat::BlobBackup => {
+            let mut blobbackup = BlobBackup::from_folder(
+                args.repository,
+                args.password
+                    .expect("Password is required for blob-backup repositories"),
+            )?;
+            blobbackup.load_all()?;
+            blobbackup.dump_all_files(args.output_dir)?;
         }
     }
 

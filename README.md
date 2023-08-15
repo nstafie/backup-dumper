@@ -14,3 +14,4 @@ cargo run
 - Duplicacy
 - Restic (only files, no folder structure)
 - Knoxite (app must be modified to use JSON encoding instead of gob)
+- BlobBackup (only files, no folder structure)
